@@ -1,7 +1,7 @@
 {
   "name": "quake-q",
   "displayName": "Quake Q",
-  "description": "Renders the letter \"q\" in the editor in the pixel style of the Quake 1 font. Only the q; the rest of the text is unchanged.",
+  "description": "Replaces the letter \"q\" in the editor with the Quake 1 icon. Only the q; the rest of the text is unchanged.",
   "version": "0.1.0",
   "publisher": "cefaloide",
   "license": "MIT",
@@ -22,7 +22,7 @@
     "font",
     "typography",
     "retro",
-    "pixel"
+    "icon"
   ],
   "activationEvents": [
     "onStartupFinished"
@@ -41,32 +41,39 @@
         "quakeQ.enabled": {
           "type": "boolean",
           "default": true,
-          "description": "Render the letter q in the Quake 1 style."
+          "description": "Replace the letter q with the Quake 1 icon."
         },
         "quakeQ.includeUppercase": {
           "type": "boolean",
           "default": true,
-          "description": "Also apply the style to the uppercase Q."
+          "description": "Also replace the uppercase Q."
         },
         "quakeQ.color": {
           "type": "string",
           "default": "#d8b070",
-          "description": "Top color of the q gradient (CSS hex)."
+          "description": "Top color of the icon gradient (CSS hex)."
         },
         "quakeQ.shadowColor": {
           "type": "string",
           "default": "#7a4a20",
-          "description": "Bottom color of the q gradient (CSS hex)."
+          "description": "Bottom color of the icon gradient (CSS hex)."
+        },
+        "quakeQ.iconScale": {
+          "type": "number",
+          "default": 1,
+          "minimum": 0.5,
+          "maximum": 3,
+          "description": "Size of the icon relative to the letter it replaces (q: x-height plus descender, Q: cap height plus descender). It never exceeds the line height."
         },
         "quakeQ.verticalOffset": {
           "type": "number",
           "default": 0,
-          "description": "Vertical adjustment of the q in pixels (positive = lower), in case it does not line up with your font."
+          "description": "Vertical adjustment of the icon in pixels (positive = lower), in case it does not line up with your font."
         },
         "quakeQ.fontFamily": {
           "type": "string",
           "default": "",
-          "markdownDescription": "Optional: name of a Quake font **installed on your system** (e.g. `DpQuake`). When set, that font is used for the q instead of the bundled pixel glyph."
+          "markdownDescription": "Optional: name of a Quake font **installed on your system** (e.g. `DpQuake`). When set, that font is used for the q instead of the icon."
         }
       }
     }

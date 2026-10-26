@@ -3,3 +3,5 @@
 test/**
 **/*.vsix
 .vscode/**
+scripts/**
+images/screenshot.png

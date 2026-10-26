@@ -5,6 +5,7 @@
   "version": "0.1.0",
   "publisher": "cefaloide",
   "license": "MIT",
+  "icon": "images/icon.png",
   "repository": {
     "type": "git",
     "url": "https://github.com/cefaloide/quake-vscode"

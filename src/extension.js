@@ -4,7 +4,7 @@ const vscode = require('vscode');
 const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
-const { buildSvg } = require('./glyph');
+const { ASPECT, buildSvg } = require('./glyph');
 
 const SECTION = 'quakeQ';
 const UPDATE_DELAY_MS = 50;
@@ -12,7 +12,7 @@ const UPDATE_DELAY_MS = 50;
 let context;
 let decorationType;
 let pattern;
-let renderOptions; // per character, only in pixel mode
+let renderOptions; // per character, only in icon mode
 let timer;
 
 function activate(ctx) {
@@ -64,8 +64,8 @@ function rebuild() {
     decorationType = createFontDecoration(fontFamily);
     renderOptions = undefined;
   } else {
-    decorationType = createPixelDecoration();
-    renderOptions = { q: pixelRenderOptions('q', config), Q: pixelRenderOptions('Q', config) };
+    decorationType = createIconDecoration();
+    renderOptions = { q: iconRenderOptions('q', config), Q: iconRenderOptions('Q', config) };
   }
   updateAll();
 }
@@ -79,33 +79,52 @@ function createFontDecoration(fontFamily) {
   });
 }
 
-// Hides the real character and draws the bundled pixel glyph over its cell.
-// Two decoration types would be needed for q and Q, so the image is chosen
-// per range through renderOptions instead.
-function createPixelDecoration() {
+// Hides the real character and draws the Quake icon over its cell. Two
+// decoration types would be needed for q and Q, so the image is chosen per
+// range through renderOptions instead.
+function createIconDecoration() {
   return vscode.window.createTextEditorDecorationType({
     color: 'transparent',
     rangeBehavior: vscode.DecorationRangeBehavior.ClosedClosed
   });
 }
 
-function pixelRenderOptions(char, config) {
+// Approximate monospace font metrics, as fractions of the font size.
+const X_HEIGHT = 0.53;
+const CAP_HEIGHT = 0.72;
+const DESCENT = 0.22;
+
+function iconRenderOptions(char, config) {
   const metrics = editorMetrics();
   const style = {
     color: sanitizeColor(config.get('color'), '#d8b070'),
-    shadowColor: sanitizeColor(config.get('shadowColor'), '#7a4a20'),
-    verticalOffset: Number(config.get('verticalOffset')) || 0
+    shadowColor: sanitizeColor(config.get('shadowColor'), '#7a4a20')
   };
-  const iconPath = writeSvg(buildSvg(char, metrics, style));
-  const width = `${metrics.charWidth}px`;
+  const scale = Math.max(0.5, Math.min(3, Number(config.get('iconScale')) || 1));
+  const verticalOffset = Number(config.get('verticalOffset')) || 0;
+  // Like the letters themselves, q spans the x-height and Q the cap height,
+  // and both hang the logo's nail into the descender like a tail.
+  const ascent = char === 'Q' ? CAP_HEIGHT : X_HEIGHT;
+  const iconHeight = Math.min((ascent + DESCENT) * metrics.fontSize * scale, metrics.lineHeight);
+  const iconWidth = iconHeight * ASPECT;
+  // The icon may be wider than one character, so the image is centred over
+  // the cell and spills into its neighbours.
+  const width = Math.max(iconWidth, metrics.charWidth);
+  // Keep the bottom on the descender line and grow upwards when scaled.
+  const baseline = metrics.lineHeight / 2 + metrics.fontSize * 0.33;
+  const bottom = baseline + DESCENT * metrics.fontSize + verticalOffset;
+  const top = Math.max(0, Math.min(metrics.lineHeight - iconHeight, bottom - iconHeight));
+  const svg = buildSvg({ width, height: metrics.lineHeight, iconWidth, iconHeight, top }, style);
+  const iconPath = writeSvg(svg);
+  const overhang = (width - metrics.charWidth) / 2;
   return {
     before: {
       contentIconPath: iconPath,
-      width,
+      width: `${width}px`,
       height: `${metrics.lineHeight}px`,
       // Zero net width: the image overlaps the (transparent) real character,
       // so cursor positions and column alignment stay untouched.
-      margin: `0 -${width} 0 0`,
+      margin: `0 -${width - overhang}px 0 -${overhang}px`,
       textDecoration: 'none; vertical-align: top; pointer-events: none'
     }
   };

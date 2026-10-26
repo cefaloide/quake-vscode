@@ -1,19 +1,19 @@
 'use strict';
 
-// Pixel-art glyphs shaped like the Quake 1 logo: a ring open at the top with
-// a nail through the middle, its point hanging below the baseline like the
-// letter's tail.
+// Pixel-art glyphs shaped like the Quake 1 logo: a round ring open at the top
+// with a nail through the middle, its point hanging below the baseline like
+// the letter's tail.
 // '#' = pixel, '.' = empty. `ascent` is the number of rows above the baseline.
 const GLYPHS = {
   q: {
     ascent: 6,
     rows: [
-      '#.....#',
+      '.#...#.',
       '#..#..#',
       '#..#..#',
-      '#..#..#',
-      '.#.#.#.',
-      '..###..',
+      '##.#.##',
+      '.#####.',
+      '...#...',
       '...#...',
       '...#...'
     ]
@@ -21,13 +21,13 @@ const GLYPHS = {
   Q: {
     ascent: 7,
     rows: [
+      '.#...#.',
       '#.....#',
-      '#.....#',
       '#..#..#',
       '#..#..#',
       '#..#..#',
-      '.#.#.#.',
-      '..###..',
+      '##.#.##',
+      '.#####.',
       '...#...',
       '...#...',
       '...#...'

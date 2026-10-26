@@ -1,40 +1,40 @@
 # Quake Q
 
-Extensión de Visual Studio Code que cambia **solo la letra `q`** del editor para que se vea con el estilo de la tipografía de **Quake 1**: pixelada, con trazos gruesos y un degradado bronce. El resto del texto no cambia.
+A Visual Studio Code extension that changes **only the letter `q`** in the editor so it looks like the **Quake 1** font: pixelated, with chunky strokes and a bronze gradient. The rest of the text is unchanged.
 
 ```
 const query = equal(Quake, q);
-      ^             ^      ^   ← estas letras se dibujan al estilo Quake
+      ^             ^      ^   ← these letters are drawn in Quake style
 ```
 
-## Cómo funciona
+## How it works
 
-- **Modo pixel (por defecto):** la extensión lleva un glifo `q` / `Q` en pixel art inspirado en la fuente de consola de Quake 1. La letra real se vuelve transparente y el glifo se dibuja encima. El cursor, la selección, copiar/pegar y la alineación de columnas siguen igual, porque el texto no cambia.
-- **Modo fuente (opcional):** si tienes instalada una fuente de Quake en el sistema (por ejemplo, *DpQuake*), pon su nombre en `quakeQ.fontFamily` y la `q` se mostrará con esa fuente.
+- **Pixel mode (default):** the extension ships a pixel-art `q` / `Q` glyph inspired by the Quake 1 console font. The real letter is made transparent and the glyph is drawn on top of it. The cursor, selection, copy/paste and column alignment are unaffected, because the text itself doesn't change.
+- **Font mode (optional):** if you have a Quake font installed on your system (for example *DpQuake*), set its name in `quakeQ.fontFamily` and the `q` will be rendered with that font.
 
-## Ajustes
+## Settings
 
-| Ajuste | Valor por defecto | Descripción |
+| Setting | Default | Description |
 | --- | --- | --- |
-| `quakeQ.enabled` | `true` | Activa o desactiva el efecto. |
-| `quakeQ.includeUppercase` | `true` | Aplica el efecto también a `Q`. |
-| `quakeQ.color` | `#d8b070` | Color superior del degradado. |
-| `quakeQ.shadowColor` | `#7a4a20` | Color inferior del degradado. |
-| `quakeQ.verticalOffset` | `0` | Ajuste vertical en píxeles si el glifo no queda alineado con tu fuente. |
-| `quakeQ.fontFamily` | `""` | Fuente de Quake instalada que se usará en lugar del glifo pixelado. |
+| `quakeQ.enabled` | `true` | Turns the effect on or off. |
+| `quakeQ.includeUppercase` | `true` | Also applies the effect to `Q`. |
+| `quakeQ.color` | `#d8b070` | Top color of the gradient. |
+| `quakeQ.shadowColor` | `#7a4a20` | Bottom color of the gradient. |
+| `quakeQ.verticalOffset` | `0` | Vertical adjustment in pixels if the glyph doesn't line up with your font. |
+| `quakeQ.fontFamily` | `""` | Installed Quake font to use instead of the pixel glyph. |
 
-Comando: **Quake Q: Activar/desactivar** (`quakeQ.toggle`).
+Command: **Quake Q: Toggle** (`quakeQ.toggle`).
 
-## Instalar desde el código
+## Install from source
 
 ```sh
 npx @vscode/vsce package
 code --install-extension quake-q-0.1.0.vsix
 ```
 
-O abre esta carpeta en VS Code y pulsa `F5` para probarla en una ventana de desarrollo.
+Or open this folder in VS Code and press `F5` to try it in an Extension Development Host window.
 
-## Notas
+## Notes
 
-- El glifo es un dibujo original inspirado en Quake; no incluye recursos de id Software.
-- Solo se decoran las líneas visibles, así que funciona bien con archivos grandes.
+- The glyph is an original drawing inspired by Quake; it does not include any id Software assets.
+- Only visible lines are decorated, so it performs well on large files.

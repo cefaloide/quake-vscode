@@ -1,7 +1,7 @@
 {
   "name": "quake-q",
   "displayName": "Quake Q",
-  "description": "Muestra la letra \"q\" del editor con el estilo pixelado de la tipografía de Quake 1. Solo la q; el resto del texto no cambia.",
+  "description": "Renders the letter \"q\" in the editor in the pixel style of the Quake 1 font. Only the q; the rest of the text is unchanged.",
   "version": "0.1.0",
   "publisher": "cefaloide",
   "license": "MIT",
@@ -31,7 +31,7 @@
     "commands": [
       {
         "command": "quakeQ.toggle",
-        "title": "Quake Q: Activar/desactivar"
+        "title": "Quake Q: Toggle"
       }
     ],
     "configuration": {
@@ -40,32 +40,32 @@
         "quakeQ.enabled": {
           "type": "boolean",
           "default": true,
-          "description": "Muestra la letra q con el estilo de Quake 1."
+          "description": "Render the letter q in the Quake 1 style."
         },
         "quakeQ.includeUppercase": {
           "type": "boolean",
           "default": true,
-          "description": "Aplica el estilo también a la Q mayúscula."
+          "description": "Also apply the style to the uppercase Q."
         },
         "quakeQ.color": {
           "type": "string",
           "default": "#d8b070",
-          "description": "Color superior del degradado de la q (CSS hex)."
+          "description": "Top color of the q gradient (CSS hex)."
         },
         "quakeQ.shadowColor": {
           "type": "string",
           "default": "#7a4a20",
-          "description": "Color inferior del degradado de la q (CSS hex)."
+          "description": "Bottom color of the q gradient (CSS hex)."
         },
         "quakeQ.verticalOffset": {
           "type": "number",
           "default": 0,
-          "description": "Ajuste vertical de la q en píxeles (positivo = más abajo), por si tu fuente no queda alineada."
+          "description": "Vertical adjustment of the q in pixels (positive = lower), in case it does not line up with your font."
         },
         "quakeQ.fontFamily": {
           "type": "string",
           "default": "",
-          "markdownDescription": "Opcional: nombre de una fuente de Quake **instalada en tu sistema** (p. ej. `DpQuake`). Si se indica, se usa esa fuente para la q en lugar del glifo pixelado incluido."
+          "markdownDescription": "Optional: name of a Quake font **installed on your system** (e.g. `DpQuake`). When set, that font is used for the q instead of the bundled pixel glyph."
         }
       }
     }

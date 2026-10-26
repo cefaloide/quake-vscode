@@ -1,12 +1,12 @@
 # Quake Q
 
-A Visual Studio Code extension that changes **only the letter `q`** in the editor so it looks like the **Quake 1** font: pixelated, with chunky strokes and a bronze gradient. The rest of the text is unchanged.
+A Visual Studio Code extension that changes **only the letter `q`** in the editor so it looks like the **Quake 1** logo, drawn as pixel art with a bronze gradient. The rest of the text is unchanged.
 
 ![Quake Q in the editor](images/screenshot.png)
 
 ## How it works
 
-- **Pixel mode (default):** the extension ships a pixel-art `q` / `Q` glyph inspired by the Quake 1 console font. The real letter is made transparent and the glyph is drawn on top of it. The cursor, selection, copy/paste and column alignment are unaffected, because the text itself doesn't change.
+- **Pixel mode (default):** the extension ships a pixel-art `q` / `Q` glyph shaped like the Quake 1 logo: a ring open at the top with a nail through the middle, its point hanging below the baseline like the letter's tail. The real letter is made transparent and the glyph is drawn on top of it. The cursor, selection, copy/paste and column alignment are unaffected, because the text itself doesn't change.
 - **Font mode (optional):** if you have a Quake font installed on your system (for example *DpQuake*), set its name in `quakeQ.fontFamily` and the `q` will be rendered with that font.
 
 ## Settings
@@ -35,5 +35,5 @@ Or open this folder in VS Code and press `F5` to try it in an Extension Developm
 
 - The screenshot is a mockup rendered with the extension's glyph; regenerate it and the icon with `node scripts/generate-images.js` (requires Playwright).
 
-- The glyph is an original drawing inspired by Quake; it does not include any id Software assets.
+- The glyph is an original pixel drawing inspired by the Quake logo; it does not include any id Software assets.
 - Only visible lines are decorated, so it performs well on large files.

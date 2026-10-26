@@ -1,35 +1,36 @@
 'use strict';
 
-// Pixel-art glyphs drawn in the spirit of Quake 1's console font (conchars):
-// chunky strokes, square corners and a hooked serif on the descender.
+// Pixel-art glyphs shaped like the Quake 1 logo: a ring open at the top with
+// a nail (crossbar near its head) through the middle, its point hanging below
+// the baseline like the letter's tail.
 // '#' = pixel, '.' = empty. `ascent` is the number of rows above the baseline.
 const GLYPHS = {
   q: {
     ascent: 6,
     rows: [
-      '.####.#',
-      '##..###',
-      '##...##',
-      '##...##',
-      '##..###',
-      '.###.##',
-      '.....##',
-      '.....##',
-      '....###'
+      '#.....#',
+      '#..#..#',
+      '#.###.#',
+      '#..#..#',
+      '.#.#.#.',
+      '..###..',
+      '...#...',
+      '...#...'
     ]
   },
   Q: {
-    ascent: 8,
+    ascent: 7,
     rows: [
-      '.#####.',
-      '##...##',
-      '##...##',
-      '##...##',
-      '##...##',
-      '##.#.##',
-      '##..##.',
-      '.###.##',
-      '......#'
+      '#.....#',
+      '#.....#',
+      '#..#..#',
+      '#.###.#',
+      '#..#..#',
+      '.#.#.#.',
+      '..###..',
+      '...#...',
+      '...#...',
+      '...#...'
     ]
   }
 };

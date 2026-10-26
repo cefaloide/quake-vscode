@@ -1,7 +1,7 @@
 {
   "name": "quake-q",
   "displayName": "Quake Q",
-  "description": "Renders the letter \"q\" in the editor in the pixel style of the Quake 1 font. Only the q; the rest of the text is unchanged.",
+  "description": "Renders the letter \"q\" in the editor as a pixel-art Quake 1 logo. Only the q; the rest of the text is unchanged.",
   "version": "0.1.0",
   "publisher": "cefaloide",
   "license": "MIT",

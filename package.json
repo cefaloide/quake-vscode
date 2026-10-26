@@ -1,0 +1,73 @@
+{
+  "name": "quake-q",
+  "displayName": "Quake Q",
+  "description": "Muestra la letra \"q\" del editor con el estilo pixelado de la tipografía de Quake 1. Solo la q; el resto del texto no cambia.",
+  "version": "0.1.0",
+  "publisher": "cefaloide",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cefaloide/quake-vscode"
+  },
+  "engines": {
+    "vscode": "^1.75.0"
+  },
+  "categories": [
+    "Themes",
+    "Other"
+  ],
+  "keywords": [
+    "quake",
+    "font",
+    "typography",
+    "retro",
+    "pixel"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./src/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "quakeQ.toggle",
+        "title": "Quake Q: Activar/desactivar"
+      }
+    ],
+    "configuration": {
+      "title": "Quake Q",
+      "properties": {
+        "quakeQ.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Muestra la letra q con el estilo de Quake 1."
+        },
+        "quakeQ.includeUppercase": {
+          "type": "boolean",
+          "default": true,
+          "description": "Aplica el estilo también a la Q mayúscula."
+        },
+        "quakeQ.color": {
+          "type": "string",
+          "default": "#d8b070",
+          "description": "Color superior del degradado de la q (CSS hex)."
+        },
+        "quakeQ.shadowColor": {
+          "type": "string",
+          "default": "#7a4a20",
+          "description": "Color inferior del degradado de la q (CSS hex)."
+        },
+        "quakeQ.verticalOffset": {
+          "type": "number",
+          "default": 0,
+          "description": "Ajuste vertical de la q en píxeles (positivo = más abajo), por si tu fuente no queda alineada."
+        },
+        "quakeQ.fontFamily": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": "Opcional: nombre de una fuente de Quake **instalada en tu sistema** (p. ej. `DpQuake`). Si se indica, se usa esa fuente para la q en lugar del glifo pixelado incluido."
+        }
+      }
+    }
+  }
+}

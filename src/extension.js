@@ -94,18 +94,21 @@ function pixelRenderOptions(char, config) {
   const style = {
     color: sanitizeColor(config.get('color'), '#d8b070'),
     shadowColor: sanitizeColor(config.get('shadowColor'), '#7a4a20'),
-    verticalOffset: Number(config.get('verticalOffset')) || 0
+    verticalOffset: Number(config.get('verticalOffset')) || 0,
+    scale: Math.max(1, Math.min(3, Number(config.get('scale')) || 1.5))
   };
-  const iconPath = writeSvg(buildSvg(char, metrics, style));
-  const width = `${metrics.charWidth}px`;
+  const { svg, width } = buildSvg(char, metrics, style);
+  // The glyph may be wider than one character, so the image is centred over
+  // the cell and spills into its neighbours.
+  const overhang = Math.round((width - metrics.charWidth) / 2 * 100) / 100;
   return {
     before: {
-      contentIconPath: iconPath,
-      width,
+      contentIconPath: writeSvg(svg),
+      width: `${width}px`,
       height: `${metrics.lineHeight}px`,
       // Zero net width: the image overlaps the (transparent) real character,
       // so cursor positions and column alignment stay untouched.
-      margin: `0 -${width} 0 0`,
+      margin: `0 -${width - overhang}px 0 -${overhang}px`,
       textDecoration: 'none; vertical-align: top; pointer-events: none'
     }
   };

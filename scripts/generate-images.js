@@ -29,8 +29,14 @@ function iconHtml() {
 function screenshotHtml() {
   const fontSize = 18, lineHeight = 26, cw = 10.8;
   const m = { fontSize, lineHeight, charWidth: cw };
-  const st = { color: '#d8b070', shadowColor: '#7a4a20' };
-  const img = c => `<img style="vertical-align:top;margin-right:-${cw}px;width:${cw}px;height:${lineHeight}px" src="data:image/svg+xml;base64,${Buffer.from(buildSvg(c, m, st)).toString('base64')}">`;
+  // Same overlay as pixelRenderOptions() in src/extension.js, default scale.
+  const st = { color: '#d8b070', shadowColor: '#7a4a20', scale: 1.5 };
+  const img = c => {
+    const { svg, width } = buildSvg(c, m, st);
+    const overhang = (width - cw) / 2;
+    return `<img style="vertical-align:top;width:${width}px;height:${lineHeight}px;margin:0 -${width - overhang}px 0 -${overhang}px" ` +
+      `src="data:image/svg+xml;base64,${Buffer.from(svg).toString('base64')}">`;
+  };
   const code = [
     ['// Quake Q: only the letter q changes', '#6a9955'],
     null,

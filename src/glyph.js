@@ -38,8 +38,9 @@ const GLYPHS = {
 const COLUMNS = 7;
 
 /**
- * Builds an SVG the size of one editor character cell (charWidth x lineHeight)
- * with the glyph sitting on the text baseline.
+ * Builds an SVG `scale` character cells wide and one line tall with the glyph
+ * sitting on the text baseline. The glyph grows with `scale` but is capped so
+ * it never leaves the line. Returns the SVG and its width in pixels.
  */
 function buildSvg(char, metrics, style) {
   const glyph = GLYPHS[char];
@@ -47,10 +48,16 @@ function buildSvg(char, metrics, style) {
     throw new Error(`No glyph for ${JSON.stringify(char)}`);
   }
   const { charWidth, lineHeight, fontSize } = metrics;
-  const pixel = charWidth / (COLUMNS + 1);
-  const left = (charWidth - COLUMNS * pixel) / 2;
+  const width = charWidth * Math.max(1, style.scale || 1);
   // Approximate baseline of a monospace font vertically centred in the line.
   const baseline = lineHeight / 2 + fontSize * 0.33 + (style.verticalOffset || 0);
+  const descent = glyph.rows.length - glyph.ascent;
+  const pixel = Math.min(
+    width / (COLUMNS + 1),
+    baseline / glyph.ascent,
+    (lineHeight - baseline) / descent
+  );
+  const left = (width - COLUMNS * pixel) / 2;
   const top = baseline - glyph.ascent * pixel;
 
   let path = '';
@@ -67,13 +74,13 @@ function buildSvg(char, metrics, style) {
 
   const gTop = r(top);
   const gBottom = r(top + glyph.rows.length * pixel);
-  return (
-    `<svg xmlns="http://www.w3.org/2000/svg" width="${r(charWidth)}" height="${r(lineHeight)}" ` +
-    `viewBox="0 0 ${r(charWidth)} ${r(lineHeight)}" shape-rendering="crispEdges">` +
+  const svg =
+    `<svg xmlns="http://www.w3.org/2000/svg" width="${r(width)}" height="${r(lineHeight)}" ` +
+    `viewBox="0 0 ${r(width)} ${r(lineHeight)}" shape-rendering="crispEdges">` +
     `<defs><linearGradient id="g" gradientUnits="userSpaceOnUse" x1="0" y1="${gTop}" x2="0" y2="${gBottom}">` +
     `<stop offset="0" stop-color="${style.color}"/><stop offset="1" stop-color="${style.shadowColor}"/>` +
-    `</linearGradient></defs><path fill="url(#g)" d="${path}"/></svg>`
-  );
+    `</linearGradient></defs><path fill="url(#g)" d="${path}"/></svg>`;
+  return { svg, width: r(width) };
 }
 
 function r(n) {

@@ -17,6 +17,7 @@ A Visual Studio Code extension that changes **only the letter `q`** in the edito
 | `quakeQ.includeUppercase` | `true` | Also applies the effect to `Q`. |
 | `quakeQ.color` | `#d8b070` | Top color of the gradient. |
 | `quakeQ.shadowColor` | `#7a4a20` | Bottom color of the gradient. |
+| `quakeQ.scale` | `1.5` | Glyph size relative to one character. Above `1` it spills into the neighbouring characters; it never grows taller than the line. |
 | `quakeQ.verticalOffset` | `0` | Vertical adjustment in pixels if the glyph doesn't line up with your font. |
 | `quakeQ.fontFamily` | `""` | Installed Quake font to use instead of the pixel glyph. |
 

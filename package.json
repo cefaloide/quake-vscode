@@ -58,6 +58,13 @@
           "default": "#7a4a20",
           "description": "Bottom color of the q gradient (CSS hex)."
         },
+        "quakeQ.scale": {
+          "type": "number",
+          "default": 1.5,
+          "minimum": 1,
+          "maximum": 3,
+          "description": "Size of the glyph relative to one character. Above 1 it spills into the neighbouring characters; it never grows taller than the line."
+        },
         "quakeQ.verticalOffset": {
           "type": "number",
           "default": 0,

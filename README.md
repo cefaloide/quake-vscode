@@ -1,20 +1,20 @@
 # Quake Q
 
-A Visual Studio Code extension that changes **only the letter `q`** in the editor so it looks like the **Quake 1** logo, drawn as pixel art with a bronze gradient. The rest of the text is unchanged.
+A Visual Studio Code extension that changes **only the letter `Q`** in the editor (uppercase by default; lowercase or both if you prefer) so it looks like the **Quake 1** logo, drawn as pixel art with a bronze gradient. The rest of the text is unchanged.
 
 ![Quake Q in the editor](images/screenshot.png)
 
 ## How it works
 
 - **Pixel mode (default):** the extension ships a pixel-art `q` / `Q` glyph shaped like the Quake 1 logo: a ring open at the top with a nail through the middle, its point hanging below the baseline like the letter's tail. The real letter is made transparent and the glyph is drawn on top of it. The cursor, selection, copy/paste and column alignment are unaffected, because the text itself doesn't change.
-- **Font mode (optional):** if you have a Quake font installed on your system (for example *DpQuake*), set its name in `quakeQ.fontFamily` and the `q` will be rendered with that font.
+- **Font mode (optional):** if you have a Quake font installed on your system (for example *DpQuake*), set its name in `quakeQ.fontFamily` and the selected letters will be rendered with that font.
 
 ## Settings
 
 | Setting | Default | Description |
 | --- | --- | --- |
 | `quakeQ.enabled` | `true` | Turns the effect on or off. |
-| `quakeQ.includeUppercase` | `true` | Also applies the effect to `Q`. |
+| `quakeQ.letters` | `uppercase` | Which letters to replace: `uppercase` (only `Q`), `lowercase` (only `q`) or `both`. |
 | `quakeQ.color` | `#d8b070` | Top color of the gradient. |
 | `quakeQ.shadowColor` | `#7a4a20` | Bottom color of the gradient. |
 | `quakeQ.scale` | `1.5` | Glyph size relative to one character. Above `1` it spills into the neighbouring characters; it never grows taller than the line. |

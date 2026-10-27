@@ -1,7 +1,7 @@
 {
   "name": "quake-q",
   "displayName": "Quake Q",
-  "description": "Renders the letter \"q\" in the editor as a pixel-art Quake 1 logo. Only the q; the rest of the text is unchanged.",
+  "description": "Renders the letter Q in the editor as a pixel-art Quake 1 logo: uppercase, lowercase or both. The rest of the text is unchanged.",
   "version": "0.1.0",
   "publisher": "cefaloide",
   "license": "MIT",
@@ -41,12 +41,22 @@
         "quakeQ.enabled": {
           "type": "boolean",
           "default": true,
-          "description": "Render the letter q in the Quake 1 style."
+          "description": "Render the letter Q in the Quake 1 style."
         },
-        "quakeQ.includeUppercase": {
-          "type": "boolean",
-          "default": true,
-          "description": "Also apply the style to the uppercase Q."
+        "quakeQ.letters": {
+          "type": "string",
+          "enum": [
+            "uppercase",
+            "lowercase",
+            "both"
+          ],
+          "enumDescriptions": [
+            "Only the uppercase Q.",
+            "Only the lowercase q.",
+            "Both Q and q."
+          ],
+          "default": "uppercase",
+          "description": "Which letters to replace with the Quake glyph."
         },
         "quakeQ.color": {
           "type": "string",

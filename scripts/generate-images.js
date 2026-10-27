@@ -29,7 +29,7 @@ function iconHtml() {
 function screenshotHtml() {
   const fontSize = 18, lineHeight = 26, cw = 10.8;
   const m = { fontSize, lineHeight, charWidth: cw };
-  // Same overlay as pixelRenderOptions() in src/extension.js, default scale.
+  // Same overlay as pixelRenderOptions() in src/extension.js, default settings.
   const st = { color: '#d8b070', shadowColor: '#7a4a20', scale: 1.5 };
   const img = c => {
     const { svg, width } = buildSvg(c, m, st);
@@ -38,19 +38,17 @@ function screenshotHtml() {
       `src="data:image/svg+xml;base64,${Buffer.from(svg).toString('base64')}">`;
   };
   const code = [
-    ['// Quake Q: only the letter q changes', '#6a9955'],
+    ['// Quake Q: by default only the uppercase Q changes', '#6a9955'],
     null,
-    [['import', '#c586c0'], [' { query } ', '#9cdcfe'], ['from', '#c586c0'], [" './quake'", '#ce9178'], [';', '#d4d4d4']],
+    [['import', '#c586c0'], [' { Quake, QuadDamage } ', '#9cdcfe'], ['from', '#c586c0'], [" './quake'", '#ce9178'], [';', '#d4d4d4']],
     null,
-    [['function', '#569cd6'], [' requestQuad', '#dcdcaa'], ['(', '#d4d4d4'], ['queue', '#9cdcfe'], [') {', '#d4d4d4']],
-    [['  const', '#569cd6'], [' quake ', '#4fc1ff'], ['= ', '#d4d4d4'], ['query', '#dcdcaa'], ['(', '#d4d4d4'], ["'Quad Damage'", '#ce9178'], [');', '#d4d4d4']],
-    [['  if', '#c586c0'], [' (', '#d4d4d4'], ['quake', '#4fc1ff'], ['.', '#d4d4d4'], ['equipped', '#9cdcfe'], [') ', '#d4d4d4'], ['return', '#c586c0'], [' queue', '#9cdcfe'], [';', '#d4d4d4']],
-    [['  queue', '#9cdcfe'], ['.', '#d4d4d4'], ['enqueue', '#dcdcaa'], ['(', '#d4d4d4'], ['quake', '#4fc1ff'], [');', '#d4d4d4']],
-    [['  return', '#c586c0'], [' queue', '#9cdcfe'], [';', '#d4d4d4']],
-    [['}', '#d4d4d4']],
+    [['const', '#569cd6'], [' quake ', '#4fc1ff'], ['= ', '#d4d4d4'], ['new', '#569cd6'], [' Quake', '#4ec9b0'], ['({ ', '#d4d4d4'], ['quality', '#9cdcfe'], [': ', '#d4d4d4'], ["'High'", '#ce9178'], [' });', '#d4d4d4']],
+    [['quake', '#4fc1ff'], ['.', '#d4d4d4'], ['on', '#dcdcaa'], ['(', '#d4d4d4'], ["'Quad'", '#ce9178'], [', () ', '#d4d4d4'], ['=>', '#569cd6'], [' QuadDamage', '#4ec9b0'], ['.', '#d4d4d4'], ['activate', '#dcdcaa'], ['());', '#d4d4d4']],
+    null,
+    [['const', '#569cd6'], [' QUEUE_SIZE ', '#4fc1ff'], ['= ', '#d4d4d4'], ['4', '#b5cea8'], [';', '#d4d4d4'], [' // lowercase q stays as is', '#6a9955']],
   ];
   const esc = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;');
-  const render = t => [...t].map(ch => /[qQ]/.test(ch) ? img(ch) + `<span style="color:transparent">${ch}</span>` : esc(ch)).join('');
+  const render = t => [...t].map(ch => ch === 'Q' ? img(ch) + `<span style="color:transparent">${ch}</span>` : esc(ch)).join('');
   const lines = code.map((l, i) => {
     let body = '';
     if (l && typeof l[0] === 'string') body = `<span style="color:${l[1]}">${render(l[0])}</span>`;

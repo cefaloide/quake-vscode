@@ -8,6 +8,11 @@ const { buildSvg } = require('./glyph');
 
 const SECTION = 'quakeQ';
 const UPDATE_DELAY_MS = 50;
+const LETTER_PATTERNS = {
+  uppercase: /Q/g,
+  lowercase: /q/g,
+  both: /[qQ]/g
+};
 
 let context;
 let decorationType;
@@ -58,7 +63,7 @@ function rebuild() {
   const config = vscode.workspace.getConfiguration(SECTION);
   if (!config.get('enabled')) return;
 
-  pattern = config.get('includeUppercase') ? /[qQ]/g : /q/g;
+  pattern = LETTER_PATTERNS[config.get('letters')] || LETTER_PATTERNS.uppercase;
   const fontFamily = (config.get('fontFamily') || '').trim();
   if (fontFamily) {
     decorationType = createFontDecoration(fontFamily);

@@ -1,3 +1,5 @@
+<p align="center"><img src="images/icon.png" alt="Quake Q icon" width="128"></p>
+
 # Quake Q
 
 A Visual Studio Code extension that changes **only the letter `Q`** in the editor (uppercase by default; lowercase or both if you prefer) so it looks like the **Quake 1** logo, drawn as pixel art with a bronze gradient. The rest of the text is unchanged.
